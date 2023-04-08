@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\context.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\input.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\monitor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\vulkan.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\window.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\win32_init.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\win32_joystick.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\win32_monitor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\win32_time.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\win32_thread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\win32_window.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\wgl_context.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\egl_context.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\osmesa_context.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\mappings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\build\vendor\glfw\src\glfw_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\include\GLFW\glfw3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\include\GLFW\glfw3native.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\win32_platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\win32_joystick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\wgl_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\egl_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\osmesa_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\vendor\glfw\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{15EC07CE-8F00-302E-A77B-03EDE8A0C215}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{BE02D758-7C06-31D0-9FF4-64B48B67D2CC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

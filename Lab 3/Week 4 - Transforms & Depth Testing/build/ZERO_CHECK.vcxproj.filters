@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 3\Week 4 - Transforms &amp; Depth Testing\build\CMakeFiles\46f769d1132d8f9e32f5dd8fefb9fe3e\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{897B25E2-0373-3A98-920E-F88BC4B871C9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

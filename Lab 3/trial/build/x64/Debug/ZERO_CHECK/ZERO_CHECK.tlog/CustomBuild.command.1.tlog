@@ -1,0 +1,10 @@
+^D:\CMP\THIRD_YEAR\SECOND_SEMESTER\GRAPHICS\LABS\LAB 3\TRIAL\BUILD\CMAKEFILES\24FCDE7822F7C263BD10FE7BBCBB21EE\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SD:/CMP/third_Year/second_semester/graphics/Labs/Lab 3/trial" "-BD:/CMP/third_Year/second_semester/graphics/Labs/Lab 3/trial/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "D:/CMP/third_Year/second_semester/graphics/Labs/Lab 3/trial/build/lab4_study.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
