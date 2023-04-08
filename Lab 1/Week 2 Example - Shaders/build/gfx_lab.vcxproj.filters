@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 1\Week 2 Example - Shaders\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 1\Week 2 Example - Shaders\vendor\glad\src\gl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\CMP\third_Year\second_semester\graphics\Labs\Lab 1\Week 2 Example - Shaders\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E436A858-A79F-34DA-80E3-2C837411C2E5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
