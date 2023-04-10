@@ -49,6 +49,7 @@ struct Vertex
 {
     vec3 pos;
     Color col; // m5lna4 al color vec3 34an da m4 floats
+    vec2 tex_coord;
 };
 
 float width = 640, height = 480;
@@ -95,10 +96,10 @@ int main()
 
     // the vectices and their colors
     Vertex vertices[] = {
-        {{-0.5f, -0.5f, 0.0f}, {255, 0, 0, 255}},
-        {{0.5f, -0.5f, 0.0f}, {0, 0, 255, 255}},
-        {{0.5f, 0.5f, 0.0f}, {0, 255, 0, 255}},
-        {{-0.5f, 0.5f, 0.0f}, {0, 255, 255, 255}},
+        {{-0.5f, -0.5f, 0.0f}, {255, 0, 0, 255}, {0, 0}},
+        {{0.5f, -0.5f, 0.0f}, {0, 0, 255, 255},{1.0,0} },
+        {{0.5f, 0.5f, 0.0f}, {0, 255, 0, 255},{1.0,1.0}},
+        {{-0.5f, 0.5f, 0.0f}, {0, 255, 255, 255},{0,1.0}},
     };
 
     uint16_t elements[] = {
@@ -165,6 +166,11 @@ int main()
     //  (void *)offsetof(Vertex, col) : means the offset is the offset of the col attribute in the Vertex struct
     // ya3ni ybd2 mn awel al col ali fel struct Vertex
 
+    GLuint texcoord_loc = 2; // glGetAttribLocation(program, "texcoord");
+    glEnableVertexAttribArray(texcoord_loc);
+    glVertexAttribPointer(texcoord_loc, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, tex_coord));
+
+
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer); // bind the element buffer to get the elements from it
     // this line isn't necessary as you will need to unbind the vertex array only if you need to bind another vertex array
     // or there is an orders would affect the vertex array but here it's not necessary
@@ -212,13 +218,18 @@ int main()
     Color img[] = {
         W,W,Y,Y,Y,Y,W,W,
         W,Y,Y,Y,Y,Y,Y,W,
-        Y,Y,B,Y,Y,B,Y,Y,
+        W,Y,Y,B,B,Y,Y,W,
         Y,Y,B,Y,Y,B,Y,Y,
         Y,Y,Y,Y,Y,Y,Y,Y,
         Y,Y,B,Y,Y,B,Y,Y,
-        W,Y,Y,B,B,Y,Y,W,
+        Y,Y,B,Y,Y,B,Y,Y,
         W,W,Y,Y,Y,Y,W,W,
     };
+    //note that howa by2ra al image mn ta7t le fo2 ya3ni a5er row ana katbo blnsbalo awel row 
+    //34an kda lazm aktb al sora ma3ksoa
+
+
+
     GLuint texture;
     glGenTextures(1, &texture);//1 is number of textures
     //this bind to send the img to gpu
@@ -237,6 +248,19 @@ int main()
     img: means the data
     */
     
+    //this function to generate the mipmap
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    /*
+    the filter of the texture by default interpolate between the pixels to get the colors in between but to stop that
+    write the following lines
+    */
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    //GL_TEXTURE_MIN_FILTER: means the filter of the texture when the texture is smaller than the pixel
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);//magnification
+    //GL_TEXTURE_MAG_FILTER: means the filter of the texture when the texture is bigger than the pixel
+    //GL_NEAREST: means that the texture will be pixelated
+
     //Now we need to send the texture to the frag shader as a uniform
     GLuint texture_loc = glGetUniformLocation(program, "tex");
 
@@ -259,11 +283,14 @@ int main()
 
         glBindVertexArray(vertex_array); // bind the vertex array to read the data from it
 
-        glActiveTexture(GL_TEXTURE0); // to activate the texture channel 0
-        // this bind to send the data of the texture to gpu 
+        //this 
         //this line is so useful if we have more than one texture on multiple texture channels
+        glActiveTexture(GL_TEXTURE0); // to activate the texture channel 0
+        
+        // this bind to send the data of the texture to gpu 
         //so we need to bind the texture to the texture channel before using it 
-        glBindTexture(GL_TEXTURE_2D, texture); // to bind the texture to the texture unit
+        glBindTexture(GL_TEXTURE_2D, texture); // to bind the texture to the texture channel 0
+
         glUniform1i(texture_loc, 0); // to send the texture to the frag shader as one integer  
 
         // Model
