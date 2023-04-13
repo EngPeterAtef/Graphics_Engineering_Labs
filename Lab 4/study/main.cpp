@@ -254,6 +254,7 @@ int main()
     /*
     the filter of the texture by default interpolate between the pixels to get the colors in between but to stop that
     write the following lines
+    the defualt value for the filters is GL_LINEAR which interpolate between the pixels
     */
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     //GL_TEXTURE_MIN_FILTER: means the filter of the texture when the texture is smaller than the pixel

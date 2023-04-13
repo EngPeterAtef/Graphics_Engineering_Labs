@@ -12,7 +12,7 @@ out vec4 frag_color;
 void main()
 {
     // frag_color = vertix_color ;//+ vec4(0,scale[0],scale[1],1.0);
-    // frag_color = texelFetch(tex, ivec2(gl_FragCoord), 0);
+    // frag_color = texelFetch(tex, ivec2(gl_FragCoord.xy), 0);
     /*
     this function reads a texel of each pixel from the texture
     tex: the texture to sample from
