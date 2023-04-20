@@ -43,5 +43,9 @@
     },
     "cmake.debugConfig": {
         "cwd": "${workspaceFolder}"
-    }
+    },
+    "cmake.generator": "MinGW Makefiles",
+    "cmake.mingwSearchDirs": [
+        "C:/msys,64/ming,w64/bin",
+      ],
 }

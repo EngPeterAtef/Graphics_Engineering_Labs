@@ -207,6 +207,7 @@ int main()
         de by7dd mkan al camera
         vec3(2.0 * cosf(time), 1.0, 2.0 * sinf(time)) : the position of the camera here it's function of time so it's like a moving camera
         vec3(0, 0, 0) : "it's like the origin of the game world ya3ni ba2ol le al camera de al reference bta3k" the position of the object that the camera is looking at
+                        or the center position which is the point (0,0,0)
         vec3(0, 1, 0) : the up vector "y axis"
         */
         // Projection

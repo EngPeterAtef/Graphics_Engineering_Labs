@@ -211,7 +211,7 @@ int main()
     // lo 5lat al defaualt 0.0 hyzhr screen soda 34an ai 7aga leha depth
     
     Color B = { 0, 0, 0, 255 };
-    Color W = { 255, 255, 255, 255 };
+    Color W = { 255, 255, 255, 0 };
     Color Y = { 255, 255, 0, 255 };
 
     // 8 * 8 img
@@ -264,6 +264,17 @@ int main()
 
     //Now we need to send the texture to the frag shader as a uniform
     GLuint texture_loc = glGetUniformLocation(program, "tex");
+
+    //blending
+    glEnable(GL_BLEND);
+    //equation of blending
+    glBlendEquation(GL_FUNC_ADD);
+    //GL_FUNC_ADD: means the equation of blending is (src_color * src_alpha) + (dst_color * dst_alpha)
+    //function parameters of blending
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //GL_SRC_ALPHA: means the alpha of the source color
+    //GL_ONE_MINUS_SRC_ALPHA: means the alpha of the destination color
+    
 
 
     while (!glfwWindowShouldClose(window))
