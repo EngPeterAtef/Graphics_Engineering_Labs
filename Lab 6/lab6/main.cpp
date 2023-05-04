@@ -227,6 +227,9 @@ int main()
     /*
     Frame buffer
     it doesn't contain data but it defines the textures that will be used
+    ya3ni badl ma barsm al texture bta3i 3la al screen barsmo 3la al frame buffer
+    we arsmo kol ma ab2a 3aizo mn hnak as the texture itself is a pixels ya3ni ha3tbr al texture bta3i 
+    akn al frame buffer da window so8yra gwa al window bta3ti
     */
     GLuint frame_buffer;
     glGenFramebuffers(1, &frame_buffer);
@@ -243,12 +246,14 @@ int main()
 
     GLsizei levels = (GLsizei)glm::floor(glm::log2((float)glm::max(RTW, RTH))) + 1;
     /*
-    max(RTW, RTH): max width or height of the texture 34an a4of na m7tag as8ro ad eh
+    max(RTW, RTH): max width or height of the texture 34an a4of na m7tag as8ro ad eh 34an awsl lel 1:1 mipmap
     log2: 34an fe kol mipmap ba2sm al size 3la 2 fa 3aiz a3rf na ha2dr 2a2smo kam mara we da haykon number of mipmap levels
     floor: to convert it to integer
     +1 : 34an al level al asli level zero
+    a7na bn7sb da 34an lo hanst5dm mipmaps fa 3aiz a3rf na ha2dr a3ml kam level 34an a6gzlha storage
     */
-    // al function de bt7gz storgae bs m4 gwaha 7aga
+
+    // al function de bt7gz storgae bs m4 bt7ot gwaha 7aga
     glTexStorage2D(GL_TEXTURE_2D,levels, GL_RGBA8, RTW, RTH);
     // attach the texture to the framebuffer
     // 1: one level
@@ -256,13 +261,15 @@ int main()
     GLuint depth_buffer;
     glGenTextures(1, &depth_buffer);
     glBindTexture(GL_TEXTURE_2D, depth_buffer);
-    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, RTW, RTH);
+    //lazm ykon al size bta3 al storage bta3t al depth buffer = size bta3 al storage bta3t al color buffer
+    //both RTW and RTH
+    glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32, RTW, RTH);//number of levels: 1 34an a7na m4 bnrsm al levels now
     //GL_DEPTH_COMPONENT32: 32 bit depth buffer "max resolution"
 
 
     // attach the texture to the framebuffer
     // GL_DRAW_FRAMEBUFFER: draw to this framebuffer
-    // GL_COLOR_ATTACHMENT0: attach to the first color attachment
+    // GL_COLOR_ATTACHMENT0: attach to the first color attachment ya3ni momkan asrsm 3la aktr mn texture fe nfs al frame buffer
     // rander_target: the texture to attach
     // 0: the mipmap level al level ali na harsm 3lah
     // GL_TEXTURE_2D: the type of texture
@@ -291,7 +298,12 @@ int main()
         glUseProgram(program);
         glBindVertexArray(vertex_array);
 
-        {
+        /*
+        ali by7sl hna ani bsrm al sora 3la al framebuffer we b3den al sora de barsmha 3la al window
+        */
+
+        {//framebuffer
+            //bind the framebuffer 34an harsm 3lah
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, frame_buffer);
 
             glViewport(0, 0, RTW, RTH);
@@ -299,7 +311,7 @@ int main()
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, texture);
+            glBindTexture(GL_TEXTURE_2D, texture);//al texture da hoa al smile face
             glBindSampler(0, sampler);
             glUniform1i(tex_loc, 0);
 
@@ -323,19 +335,19 @@ int main()
             }
         }
 
-        {
+        {//window
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+            //unbinding the framebuffer 34an na harsm 3la l 4a4a 3adi delw2ty
 
             glViewport(0, 0, width, height);
             glClearColor(0, 0.1, 0, 1.0);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, render_target);
+            glBindTexture(GL_TEXTURE_2D, render_target);//al texture da hoa al 16 smile face bel red background
 
-            glGenerateMipmap(GL_TEXTURE_2D);
-            /*
-            34an lo al sora bt2rb we tb3t y3mlha aktr mn mipmap levels
-            */
+            //a7na bnrsm 3la level 0 so we need to generate the other mipmaps to  use them if needed
+            glGenerateMipmap(GL_TEXTURE_2D);//34an lo al sora bt2rb we tb3t y3mlha aktr mn mipmap levels
+
             glBindSampler(0, sampler);
             glUniform1i(tex_loc, 0);
 
@@ -345,10 +357,12 @@ int main()
                 // glm::vec3(2.0f * cosf(time), 1.0f, 2.0f * sinf(time)),
                 glm::vec3(0.0f, 0.0f, 0.0f),
                 glm::vec3(0.0f, 1.0f, 0.0f));
+            
+            //de ya3ni harsm al framebuffer 3la al window 8*2 = 16 mara
             for (int i = 0; i < 8; i++)
             {
-                float theta = glm::two_pi<float>() * (float(i) / 8);
-                for (int z = 1; z <= 2; z++)
+                float theta = glm::two_pi<float>() * (float(i) / 8);//angle
+                for (int z = 1; z <= 2; z++)//position
                 {
                     glm::mat4 M = glm::yawPitchRoll(theta, 0.0f, 0.0f) * glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, (float)z));
 
