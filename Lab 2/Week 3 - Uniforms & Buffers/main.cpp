@@ -52,7 +52,7 @@ int main() {
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    GLFWwindow* window = glfwCreateWindow(640, 480, "Hello Triangle", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "Hello Triangle", nullptr, nullptr);
 
     if(!window){
         std::cerr << "Failed to create Window\n";

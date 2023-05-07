@@ -85,7 +85,7 @@ int main()
     GLuint program = glCreateProgram();
     GLuint vs = load_shader("./assets/simple.vert", GL_VERTEX_SHADER);
     GLuint fs = load_shader("./assets/simple.frag", GL_FRAGMENT_SHADER);
-    
+
     glAttachShader(program, vs);
     glAttachShader(program, fs);
     // m4 m7tgen dol tani 3la al shader
@@ -133,15 +133,15 @@ int main()
     //     {{0.5f, 0.5f, 0.0f}, {0, 255, 0, 255}}
     //     };
     Vertex vertices[] = {
-        {{-0.5f, -0.5f, 0.0f}, {255, 0, 0, 255}},
+        {{-0.5f, -0.5f, 0.0f}, {0, 255, 255, 255}},
         {{0.5f, -0.5f, 0.0f}, {0, 0, 255, 255}},
-        {{0.5f, 0.5f, 0.0f}, {0, 255, 0, 255}},
-        {{-0.5f, 0.5f, 0.0f}, {0, 255, 255, 255}},
+        {{-0.5f, 0.5f, 0.0f}, {0, 255, 0, 255}},
+        {{0.5f, 0.5f, 0.0f}, {255, 0, 0, 255}},
     };
 
     uint16_t elements[] = {
         0, 1, 2, // kda the vertex 0,1,2 will be connected to make the first triangle
-        2, 3, 0  // the vertex 2,3,0 will be connected to make the second triangle
+        3, 1, 2  // the vertex 2,3,0 will be connected to make the second triangle
     };
 
     GLuint vertex_buffer;
@@ -167,7 +167,7 @@ int main()
     bt3ml bind 3la buffer mo5tlf
     */
 
-    //The vertex array is an object resposible fro dealing with the data in the buffers and reading them
+    // The vertex array is an object resposible fro dealing with the data in the buffers and reading them
     GLuint vertex_array;
     // this line put the name (id) of the vertex array in the vertex_array variable as it's just unsigned int
     // and this line is the one that initialize the vertex array
@@ -180,7 +180,7 @@ int main()
     // but it's for the sake of being sure
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 
-    //note that the vertex_array knew which buffer has the data of position and color from binding the vertex_buffer to GL_ARRAY_BUFFER
+    // note that the vertex_array knew which buffer has the data of position and color from binding the vertex_buffer to GL_ARRAY_BUFFER
 
     // get the location of the position in the shader
     GLuint position_loc = 0; // glGetAttribLocation(program, "position");
@@ -204,9 +204,9 @@ int main()
     // ya3ni ybd2 mn awel al col ali fel struct Vertex
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer); // bind the element buffer to get the elements from it
-    //this line isn't necessary as you will need to unbind the vertex array only if you need to bind another vertex array
-    //or there is an orders would affect the vertex array but here it's not necessary
-    glBindVertexArray(0);                                // unbind the vertex array
+    // this line isn't necessary as you will need to unbind the vertex array only if you need to bind another vertex array
+    // or there is an orders would affect the vertex array but here it's not necessary
+    glBindVertexArray(0); // unbind the vertex array
     /*
     NOTE:
     if you want to use one buffer for the vertecies and the elements you will need to bind
@@ -224,7 +224,7 @@ int main()
         glClearColor(0, 0, 0, 1.0f);  // to set the configuration : ya3ni da al color ali hyt7t lma a3ml clear
         glClear(GL_COLOR_BUFFER_BIT); // order clear the back buffer
         glUseProgram(program);
-        
+
         glBindVertexArray(vertex_array); // bind the vertex array to read the data from it
 
         glUniform1f(time_loc, time); // this line send the time to the time_loc in the shader
@@ -241,10 +241,10 @@ int main()
         // to draw the square
         // glDrawArrays(GL_TRIANGLE_FAN, 0, 4); // 6 vertices (6 points) for the square
 
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void*)0); // draw the square using the elements
-        //6: is the number of elements NOT the number of vertices
-        //GL_UNSIGNED_SHORT: is the type of the elements 34an a7na 3amlnhom uint16
-        // (void*)0 : is the offset of the elements in the element buffer 34an ybd2 mn awel al buffer
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, (void *)0); // draw the square using the elements
+        // 6: is the number of elements NOT the number of vertices
+        // GL_UNSIGNED_SHORT: is the type of the elements 34an a7na 3amlnhom uint16
+        //  (void*)0 : is the offset of the elements in the element buffer 34an ybd2 mn awel al buffer
 
         glfwSwapBuffers(window); // bygib al back buffer mkan al front buffer
         glfwPollEvents();        // to check if there is any event like keyboard or mouse

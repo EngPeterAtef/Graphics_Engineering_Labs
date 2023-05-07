@@ -3,9 +3,6 @@
     "cmake.debugConfig": {
         "cwd": "${workspaceFolder}",
     },
-    "cmake.mingwSearchDirs": [
-        "C:/msys,64/ming,w64/bin",
-    ],
     "cmake.generator": "MinGW Makefiles",
     "files.associations": {
         "*.ejs": "html",

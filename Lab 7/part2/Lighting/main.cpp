@@ -127,10 +127,10 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glUseProgram(program);
-
-        glUniform3f(uloc("sky.top"), 0.0f, 0.1f, 0.5f);
-        glUniform3f(uloc("sky.horizon"), 0.3f, 0.3f, 0.3f);
-        glUniform3f(uloc("sky.bottom"), 0.1f, 0.1f, 0.1f);
+        //the ambient colors depends on the normal vector of the surface
+        glUniform3f(uloc("sky.top"), 0.0f, 0.0f, 1.0f);
+        glUniform3f(uloc("sky.horizon"), 1.0f, 0.0f, 0.0f);
+        glUniform3f(uloc("sky.bottom"), 0.0f, 1.0f, 0.0f);
 
         glm::vec3 spot_position = glm::vec3(1.0f, 0.01f, 0.0f);
         glm::vec3 spot_direction = glm::normalize(glm::vec3(-1.0f, -0.1f, 0.0f));
@@ -174,15 +174,17 @@ int main() {
             glm::mat4 M_I = glm::inverse(M);
             glUniformMatrix4fv(uloc("M_IT"), 1, true, &M_I[0][0]);
 
+            //texture unit zero
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, albedo[0]);
             glBindSampler(0, sampler);
             glUniform1i(uloc("material.albedo"), 0);
-
+            
+            //texture unit one
             glActiveTexture(GL_TEXTURE1);
             glBindTexture(GL_TEXTURE_2D, specular[0]);
             glBindSampler(1, sampler);
-            glUniform1i(uloc("material.specular"), 1);
+            glUniform1i(uloc("material.specular"), 1);//we send the unit number to the uniform
 
             glActiveTexture(GL_TEXTURE2);
             glBindTexture(GL_TEXTURE_2D, roughness[0]);

@@ -205,24 +205,24 @@ int main()
         mat4 V = lookAt(vec3(2.0 * cosf(time), 0, 2.0 * sinf(time)), vec3(0, 0, 0), vec3(0, 1, 0));
         /*
         de by7dd mkan al camera
-        vec3(2.0 * cosf(time), 1.0, 2.0 * sinf(time)) : the position of the camera here it's function of time so it's like a moving camera
-        vec3(0, 0, 0) : "it's like the origin of the game world ya3ni ba2ol le al camera de al reference bta3k" the position of the object that the camera is looking at
-                        or the center position which is the point (0,0,0)
-        vec3(0, 1, 0) : the up vector "y axis"
+        eye:vec3(2.0 * cosf(time), 1.0, 2.0 * sinf(time)) : the position of the camera here it's function of time so it's like a moving camera
+        center:vec3(0, 0, 0) : "it's like the origin of the game world ya3ni ba2ol le al camera de al reference bta3k" the position of the object that the camera is looking at
+                        or the center position which is the point (0,0,0)"origin of the world space"
+        up:vec3(0, 1, 0) : the up vector "y axis"
         */
         // Projection
         mat4 P = perspective(pi<float>() * 0.5f, width / height, 0.01f, 1000.0f);
         /*
         the prev function determines the projection matrix which is the matrix that determines how the 3d world is projected on the 2d screen
         ya3ni akno b7dd al lense of the camera
-        pi<float>()*0.5f : the sight angle
+        pi<float>()*0.5f : the fov angle in direction of y axis
         width/height : the aspect ratio
         0.01f : the near plane: as8r distance momkan a4ofha
         1000.0f : the far plane akbr distance momkan a4ofha
         */
-        for (int i = -2; i <= 2; i++) 
+        for (int i = -1; i <= 1; i++) 
         {
-            mat4 M = translate(mat4(1.0f), vec3(0.0, 0.0, (float)i));
+            mat4 M = translate(mat4(1.0f), vec3(0.0, 0.0, (float)i));//translation with i in z axis
             mat4 MVP = P * V * M;//lazm al order da 34an a7na 3aizen n3ml al model matrix al awel we b3den al view we b3den al projection
             glUniformMatrix4fv(mvp_loc, 1, GL_FALSE, &MVP[0][0]);
             // mvp_loc : is the location of the MVP matrix in the shader

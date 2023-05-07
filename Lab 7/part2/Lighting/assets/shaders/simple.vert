@@ -19,7 +19,7 @@ out Varyings {
 } vs_out;
 
 void main() {
-    vec3 world = (M * vec4(position, 1.0)).xyz;
+    vec3 world = (M * vec4(position, 1.0)).xyz;//point in world
     gl_Position = VP * vec4(world, 1.0);
     vs_out.color = color;
     vs_out.tex_coord = tex_coord;

@@ -45,7 +45,7 @@ void main(){
     float cos_theta=lambert(light_dir,fs_in.normal);
     vec3 diffuse=light_diffuse*material_diffuse*cos_theta;
     //specular
-    vec3 reflect_dir=reflect(-light_dir,normal);//reflect_dir = 2(N · L)N - L where L = -
+    vec3 reflect_dir=reflect(-light_dir,normal);//reflect_dir = 2(N · L)N - L where L = -light_dir
     vec3 light_specular=vec3(0.4275, 1.0, 0.6667);//color of the object in the light
     vec3 material_specular=vec3(1.,.9,.8);//color of the object in the light
     float material_shininess=10.;//shininess of the object
