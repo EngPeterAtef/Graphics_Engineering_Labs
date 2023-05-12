@@ -1,5 +1,5 @@
 #include <iostream>
-#include <glad/gl.h> 
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
 #include <string>
 #include <fstream>
@@ -9,10 +9,11 @@
 #include "mesh.hpp"
 #include "texture.hpp"
 
-GLuint load_shader(const std::string& path, GLenum shader_type) {
+GLuint load_shader(const std::string &path, GLenum shader_type)
+{
     std::ifstream file(path);
     std::string sourceCode = std::string(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
-    const char* sourceCodeCStr = sourceCode.c_str();
+    const char *sourceCodeCStr = sourceCode.c_str();
 
     GLuint shader = glCreateShader(shader_type);
     glShaderSource(shader, 1, &sourceCodeCStr, nullptr);
@@ -20,7 +21,8 @@ GLuint load_shader(const std::string& path, GLenum shader_type) {
 
     GLint status;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-    if (!status) {
+    if (!status)
+    {
         GLint length;
         glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
         char *logStr = new char[length];
@@ -35,26 +37,30 @@ GLuint load_shader(const std::string& path, GLenum shader_type) {
     return shader;
 }
 
-int main() {
-    
-    if(!glfwInit()){
+int main()
+{
+
+    if (!glfwInit())
+    {
         std::cerr << "Failed to initialize GLFW\n";
         exit(1);
     }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    
-    GLFWwindow* window = glfwCreateWindow(640, 480, "Hello Triangle", nullptr, nullptr);
 
-    if(!window){
+    GLFWwindow *window = glfwCreateWindow(640, 480, "Hello Triangle", nullptr, nullptr);
+
+    if (!window)
+    {
         std::cerr << "Failed to create Window\n";
         glfwTerminate();
         exit(1);
     }
 
     glfwMakeContextCurrent(window);
-    if(!gladLoadGL(glfwGetProcAddress)){
+    if (!gladLoadGL(glfwGetProcAddress))
+    {
         std::cerr << "Failed to load OpenGL\n";
         glfwDestroyWindow(window);
         glfwTerminate();
@@ -74,11 +80,11 @@ int main() {
         loadImage("assets/images/ground/roughness.png"),
     };
     GLuint ao[] = {
-        loadImage("assets/images/suzanne/ambient_occlusion.jpg"),
+        loadImage("assets/images/monkey/ambient_occlusion.jpg"),
         fromColor({255, 255, 255, 255}),
     };
     GLuint emissive[] = {
-        fromColor({0, 0, 0, 255}),
+        loadImage("assets/images/monkey/emissive.jpg"),
         fromColor({0, 0, 0, 255}),
     };
 
@@ -113,11 +119,13 @@ int main() {
     // GLint m_loc = glGetUniformLocation(program, "M");
     // GLint m_it_loc = glGetUniformLocation(program, "M_IT");
 
-    auto uloc = [program](const std::string& name) -> GLint {
+    auto uloc = [program](const std::string &name) -> GLint
+    {
         return glGetUniformLocation(program, name.c_str());
     };
 
-    while(!glfwWindowShouldClose(window)){
+    while (!glfwWindowShouldClose(window))
+    {
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
 
@@ -127,7 +135,7 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glUseProgram(program);
-        //the ambient colors depends on the normal vector of the surface
+        // the ambient colors depends on the normal vector of the surface
         glUniform3f(uloc("sky.top"), 0.0f, 0.0f, 1.0f);
         glUniform3f(uloc("sky.horizon"), 1.0f, 0.0f, 0.0f);
         glUniform3f(uloc("sky.bottom"), 0.0f, 1.0f, 0.0f);
@@ -140,15 +148,15 @@ int main() {
         glUniform3f(uloc("lights[0].direction"), spot_direction.x, spot_direction.y, spot_direction.z);
         glUniform3f(uloc("lights[0].color"), 0.8f, 0.6f, 0.2f);
         glUniform3f(uloc("lights[0].attenuation"), 0.0f, 1.0f, 0.0f);
-        glUniform2f(uloc("lights[0].cone_angles"), 0.5f*glm::quarter_pi<float>(), 0.5f*glm::half_pi<float>());
-        
+        glUniform2f(uloc("lights[0].cone_angles"), 0.5f * glm::quarter_pi<float>(), 0.5f * glm::half_pi<float>());
+
         glm::vec3 point_position = glm::vec3(0.0f, 0.01f, 0.0f);
-        
+
         glUniform1i(uloc("lights[1].type"), 1);
         glUniform3f(uloc("lights[1].position"), point_position.x, point_position.y, point_position.z);
         glUniform3f(uloc("lights[1].color"), 0.2f, 0.6f, 0.8f);
         glUniform3f(uloc("lights[1].attenuation"), 0.0f, 1.0f, 0.0f);
-        
+
         glm::vec3 directional_direction = glm::normalize(glm::vec3(2.0f, -1.0f, 2.0f));
 
         glUniform1i(uloc("lights[2].type"), 0);
@@ -157,34 +165,33 @@ int main() {
 
         glUniform1i(uloc("light_count"), 3);
 
-        glm::mat4 P = glm::perspective(glm::pi<float>()*0.5f, float(width)/height, 0.01f, 1000.0f);
+        glm::mat4 P = glm::perspective(glm::pi<float>() * 0.5f, float(width) / height, 0.01f, 1000.0f);
         glm::vec3 camera_position = glm::vec3(2.0f, 1.0f, 2.0f);
         glm::mat4 V = glm::lookAt(
             camera_position,
             glm::vec3(0.0f, 0.0f, 0.0f),
-            glm::vec3(0.0f, 1.0f, 0.0f)
-        );
+            glm::vec3(0.0f, 1.0f, 0.0f));
         glm::mat4 VP = P * V;
         glUniformMatrix4fv(uloc("VP"), 1, false, &VP[0][0]);
         glUniform3f(uloc("camera_position"), camera_position.x, camera_position.y, camera_position.z);
-        
+
         {
             glm::mat4 M = glm::yawPitchRoll(time, 0.0f, 0.0f);
             glUniformMatrix4fv(uloc("M"), 1, false, &M[0][0]);
             glm::mat4 M_I = glm::inverse(M);
             glUniformMatrix4fv(uloc("M_IT"), 1, true, &M_I[0][0]);
 
-            //texture unit zero
+            // texture unit zero
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, albedo[0]);
             glBindSampler(0, sampler);
             glUniform1i(uloc("material.albedo"), 0);
-            
-            //texture unit one
+
+            // texture unit one
             glActiveTexture(GL_TEXTURE1);
             glBindTexture(GL_TEXTURE_2D, specular[0]);
             glBindSampler(1, sampler);
-            glUniform1i(uloc("material.specular"), 1);//we send the unit number to the uniform
+            glUniform1i(uloc("material.specular"), 1); // we send the unit number to the uniform
 
             glActiveTexture(GL_TEXTURE2);
             glBindTexture(GL_TEXTURE_2D, roughness[0]);
@@ -208,7 +215,7 @@ int main() {
             glUniformMatrix4fv(uloc("M"), 1, false, &M[0][0]);
             glm::mat4 M_I = glm::inverse(M);
             glUniformMatrix4fv(uloc("M_IT"), 1, true, &M_I[0][0]);
-            
+
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, albedo[1]);
             glBindSampler(0, sampler);
